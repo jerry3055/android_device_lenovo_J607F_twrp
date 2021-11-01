@@ -25,7 +25,7 @@ PRODUCT_COPY_FILES += \
     $(OUT_DIR)/target/product/J607F/obj/SHARED_LIBRARIES/libandroidicu_intermediates/libandroidicu.so:$(TARGET_COPY_OUT_RECOVERY)/root/system/lib64/libcuuc.so
 
 # Dynamic partitions
-#PRODUCT_USE_DYNAMIC_PARTITIONS := true
+PRODUCT_USE_DYNAMIC_PARTITIONS := true
 
 # fastbootd
 PRODUCT_PACKAGES += \

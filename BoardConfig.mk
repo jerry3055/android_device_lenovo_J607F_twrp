@@ -90,17 +90,48 @@ TARGET_USES_HARDWARE_QCOM_BOOTCTRL := true
 # A/B OTA
 AB_OTA_UPDATER := true
 BOARD_USES_RECOVERY_AS_BOOT := true
-BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
+#BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
 
-
+PRODUCT_ENFORCE_VINTF_MANIFEST := true
+TARGET_USE_CUSTOM_LUN_FILE_PATH := /config/usb_gadget/g1/functions/mass_storage.0/lun.%d/file
 #BOARD_BOOTIMAGE_PARTITION_SIZE := 100663296
 #BOARD_RECOVERYIMAGE_PARTITION_SIZE := 1000663296
+
+# Dynamic/Logical Partitions
+BOARD_LENOVO_DYNAMIC_PARTITIONS_PARTITION_LIST := product system system_ext vendor
+BOARD_LENOVO_DYNAMIC_PARTITIONS_SIZE := 6442450944
+BOARD_SUPER_PARTITION_GROUPS := lenovo_dynamic_partitions
+BOARD_SUPER_PARTITION_SIZE := 10737418240
 
 # Recovery
 TARGET_RECOVERY_PIXEL_FORMAT := RGBX_8888
 
 # Partitions (listed in the file) to be wiped under recovery.
 TARGET_RECOVERY_WIPE := $(DEVICE_PATH)/recovery.wipe
+
+# Extras
+TARGET_SYSTEM_PROP += $(DEVICE_PATH)/system.prop
+TW_INCLUDE_RESETPROP := true
+TW_INCLUDE_REPACKTOOLS := true
+
+
+
+
+
+
+
+#加解密
+TW_INCLUDE_CRYPTO := true
+TW_INCLUDE_CRYPTO_FBE := true
+TW_INCLUDE_FBE_METADATA_DECRYPT := true
+BOARD_USES_METADATA_PARTITION := true
+USE_FSCRYPT := true
+
+
+
+
+
+
 
 # Use mke2fs to create ext4 images
 TARGET_USES_MKE2FS := true
@@ -111,6 +142,9 @@ VENDOR_SECURITY_PATCH := 2099-12-31
 PLATFORM_VERSION := 16.1.0
 
 # TWRP Configuration
+TW_EXCLUDE_DEFAULT_USB_INIT := true
+TARGET_RECOVERY_QCOM_RTC_FIX := true
+TW_EXTRA_LANGUAGES := true
 TW_THEME := portrait_hdpi
 TW_EXTRA_LANGUAGES := true
 TW_SCREEN_BLANK_ON_BOOT := true
@@ -128,8 +162,9 @@ RECOVERY_SDCARD_ON_DATA := true # 设置内部存储的数据是否在 data 分�
 BOARD_HAS_NO_REAL_SDCARD := true # 这个我也不知道什么作用
 BOARD_PROVIDES_GPTUTILS := true # 这个我也不知道什么作用
 TW_USE_TOOLBOX := true # 是否使用 ToolBox
-TWRP_INCLUDE_LOGCAT := true # 是否启用 logcat
-TARGET_USES_LOGD := true # 是否启用 logcat
+TARGET_USES_LOGD := true
+TWRP_EVENT_LOGGING := true
+TWRP_INCLUDE_LOGCAT := true
 
 TW_RECOVERY_ADDITIONAL_RELINK_BINARY_FILES += \
     $(TARGET_OUT_EXECUTABLES)/ashmemd
